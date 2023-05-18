@@ -8,7 +8,7 @@ const Card = () => {
     //   return (
     <div className="flex min-h-screen flex-col items-center justify-around p-24">
       {weatherData ? (
-        <InputBox style="w-1/2 mt-0" setWeatherData={setWeatherData} />
+        <InputBox style="w-1/2 -mt-8" setWeatherData={setWeatherData} />
       ) : (
         <></>
       )}
