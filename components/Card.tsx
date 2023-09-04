@@ -2,27 +2,35 @@
 import React from "react";
 import InputBox from "./InputBox";
 import { useState } from "react";
+
+interface weatherdinf {
+  nearest_area: Array<any>;
+  current_condition: Array<any>;
+}
+
 const Card = () => {
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState<weatherdinf>(null);
   return (
-    //   return (
-    <div className="flex min-h-screen flex-col items-center justify-around p-24">
+    <div className="flex min-h-screen flex-col items-center justify-around p-24 pt-2 backdrop-saturate-100">
       {weatherData ? (
-        <InputBox style="w-1/2 -mt-8" setWeatherData={setWeatherData} />
+        <div>
+          <label className={`flex text-7xl font-mono`}>
+            <a href="/">🌦️Weather Forcast</a>
+          </label>
+          <InputBox style="w-full" setWeatherData={setWeatherData} />
+        </div>
       ) : (
         <></>
       )}
       <div
-        className={`flex-col justify-around grid place-items-center border-black border-2 border-dashed p-36 shadow-lg hover:shadow-blue-500 ${
+        className={`flex-col justify-around grid place-items-center border-black border-2 border-dashed p-36 shadow-xl hover:shadow-emerald-400 backdrop-blur-md	 ${
           weatherData ? "place-items-baseline" : ""
         }`}
       >
         <label
-          className={`flex text-7xl font-mono ${
-            weatherData ? "invisible" : "visible"
-          }`}
+          className={`flex text-7xl font-mono ${weatherData ? "hidden" : ""}`}
         >
-          🌦️Weather Forcast
+          <a href="/#">🌦️Weather Forcast</a>
         </label>
         {weatherData ? <></> : <InputBox setWeatherData={setWeatherData} />}
         {weatherData ? (
@@ -74,10 +82,6 @@ const Card = () => {
           <></>
         )}
       </div>
-      {/* <div className="flex flex-col ">
-        Today
-        {weatherData?.nearest_area[0].areaName[0].value}
-      </div> */}
     </div>
   );
 };
