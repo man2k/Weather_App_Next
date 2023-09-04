@@ -3,15 +3,32 @@ import React from "react";
 import InputBox from "./InputBox";
 import { useState } from "react";
 
+interface value {
+  value: string;
+}
+interface value3 {
+  value: string;
+}
+interface value2 {
+  FeelsLikeC: string;
+  windspeedKmph: string;
+  precipInches: string;
+  visibility: string;
+  weatherDesc: Array<value3>;
+}
+
+interface nearestarea extends Array<{}> {
+  areaName: Array<value>;
+}
 interface weatherdinf {
-  nearest_area: Array<any>;
-  current_condition: Array<any>;
+  nearest_area: Array<nearestarea>;
+  current_condition: Array<value2>;
 }
 
 const Card = () => {
   const [weatherData, setWeatherData] = useState<weatherdinf>(null);
   return (
-    <div className="flex min-h-screen flex-col items-center justify-around p-24 pt-2 backdrop-saturate-100">
+    <div className="flex min-h-screen flex-col items-center justify-around p-24 pt-2">
       {weatherData ? (
         <div>
           <label className={`flex text-7xl font-mono`}>
@@ -23,7 +40,7 @@ const Card = () => {
         <></>
       )}
       <div
-        className={`flex-col justify-around grid place-items-center border-black border-2 border-dashed p-36 shadow-xl hover:shadow-emerald-400 backdrop-blur-md	 ${
+        className={`flex-col justify-around grid place-items-center border-black border-2 p-36 shadow-xl hover:shadow-emerald-400 backdrop-blur-lg ${
           weatherData ? "place-items-baseline" : ""
         }`}
       >
@@ -62,7 +79,9 @@ const Card = () => {
             <div className="flex flex-col justify-around">
               <label className="text-9xl ml-80">
                 {(function () {
-                  const temp = weatherData?.current_condition[0].FeelsLikeC;
+                  const temp: number = Number(
+                    weatherData?.current_condition[0].FeelsLikeC
+                  );
                   if (temp > 28 && temp < 32) {
                     return "🌞";
                   } else if (temp > 32) {
